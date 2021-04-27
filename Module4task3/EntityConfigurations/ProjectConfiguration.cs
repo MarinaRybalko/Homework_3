@@ -12,6 +12,11 @@ namespace Module4task3.EntityConfigurations
             builder.Property(p => p.Name).IsRequired().HasColumnName("Name").HasMaxLength(50);
             builder.Property(p => p.Budget).IsRequired().HasColumnName("Budget").HasColumnType("money");
             builder.Property(p => p.StartedDate).IsRequired().HasColumnName("StartedDate").HasColumnType("datetime2");
+
+            builder.HasOne(h => h.Client)
+                .WithMany(w => w.Projects)
+                .HasForeignKey(h => h.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
