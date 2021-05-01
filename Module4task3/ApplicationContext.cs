@@ -1,6 +1,8 @@
-﻿using Module4task3.Entities;
+﻿using System;
+using Module4task3.Entities;
 using Module4task3.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Module4task3
 {
@@ -15,6 +17,12 @@ namespace Module4task3
         public DbSet<Office> Offices { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Title> Titles { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information);
+            optionsBuilder.UseLazyLoadingProxies();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

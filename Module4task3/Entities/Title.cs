@@ -7,6 +7,6 @@ namespace Module4task3.Entities
         public int TitleId { get; set; }
         public string Name { get; set; }
 
-        public List<Employee> Employee { get; set; } = new List<Employee>();
+        public virtual List<Employee> Employee { get; set; } = new List<Employee>();
     }
 }

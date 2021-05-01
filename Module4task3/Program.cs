@@ -1,28 +1,41 @@
 ﻿using System;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using Module4task3.Services;
 
 namespace Module4task3
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory());
-            builder.AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            //await using (var context = new SampleContextFactory().CreateDbContext(args))
+            //{
+            //    await new LinqQueries(context).Task1();
+            //}
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder
-                .UseSqlServer(connectionString)
-                .Options;
+            //await using (var context = new SampleContextFactory().CreateDbContext(args))
+            //{
+            //    await new LinqQueries(context).Task2();
+            //}
 
-            using (var db = new ApplicationContext(options))
+            //await using (var context = new SampleContextFactory().CreateDbContext(args))
+            //{
+            //    await new LinqQueries(context).Task3();
+            //}
+
+            //await using (var context = new SampleContextFactory().CreateDbContext(args))
+            //{
+            //    await new LinqQueries(context).Task4();
+            //}
+
+            //await using (var context = new SampleContextFactory().CreateDbContext(args))
+            //{
+            //    await new LinqQueries(context).Task5();
+            //}
+
+            await using (var context = new SampleContextFactory().CreateDbContext(args))
             {
-               
+                await new LinqQueries(context).Task6();
             }
 
             Console.Read();
